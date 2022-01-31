@@ -10,6 +10,14 @@ public class Demo {
 
   @GetMapping(value = "/")
   public String getDemo() {
-    return "Demo is working. So is Hot Reload";
+
+    String s = getString();
+
+    System.out.println(s);
+    return "Demo is working. Live Reload";
+  }
+
+  private String getString() {
+    return "Breakpoint is working";
   }
 }
