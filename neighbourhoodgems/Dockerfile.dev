@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:1
+
+## Creates a Docker image for Spring Boot Application that can be debugged remotely
+
+FROM openjdk:11-jdk-slim as BUILD
+
+# Set the current working directory inside the image
+WORKDIR /app
+
+# Copy maven wrapper and dependencies
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+
+# Run maven wrapper and install dependencies into image
+RUN ./mvnw dependency:go-offline -B
+
+# Copy the project source
+COPY src ./src
+
+# 
+CMD ["./mvnw", "spring-boot:run"]
