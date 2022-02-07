@@ -1,6 +1,7 @@
 package com.app.neighbourhoodgems.Landmark;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,7 +33,7 @@ public interface LandmarkRepository extends JpaRepository<Landmark, Integer> {
    */
   @Query("SELECT l from Landmark l WHERE l.id = :id")
   @Transactional(readOnly = true)
-  public Landmark findById(@Param("id") Integer id);
+  public Optional<Landmark> findById(@Param("id") Integer id);
 
   // Search Landmarks
 

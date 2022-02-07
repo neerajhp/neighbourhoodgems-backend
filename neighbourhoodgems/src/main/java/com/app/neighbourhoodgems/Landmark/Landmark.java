@@ -1,9 +1,11 @@
 package com.app.neighbourhoodgems.Landmark;
 
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,6 +17,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "landmarks")
 public class Landmark {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
   @Column(name = "name")
   private String name;
@@ -34,10 +40,12 @@ public class Landmark {
   @Column(name = "url")
   private String url;
 
-  @OneToOne private int type;
+  @OneToOne
+  @JoinColumn(name = "type", referencedColumnName = "id")
+  private Type type;
 
-  @OneToMany(mappedBy = "landmark")
-  Set<Tag> tags;
+  // @OneToMany(mappedBy = "landmark")
+  // Set<Tag> tags;
 
   public String getName() {
     return this.name;
@@ -87,19 +95,19 @@ public class Landmark {
     this.url = url;
   }
 
-  public int getType() {
+  public Type getType() {
     return this.type;
   }
 
-  public void setType(int type) {
+  public void setType(Type type) {
     this.type = type;
   }
 
-  public Set<Tag> getTags() {
-    return this.tags;
-  }
+  // public Set<Tag> getTags() {
+  //   return this.tags;
+  // }
 
-  public void setTags(Set<Tag> tags) {
-    this.tags = tags;
-  }
+  // public void setTags(Set<Tag> tags) {
+  //   this.tags = tags;
+  // }
 }

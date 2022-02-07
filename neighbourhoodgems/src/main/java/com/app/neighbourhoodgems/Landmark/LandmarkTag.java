@@ -1,8 +1,8 @@
 package com.app.neighbourhoodgems.Landmark;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -12,13 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "landmarkTags")
-public class LandmarkTag {
+public class LandmarkTag implements Serializable {
 
-  @ManyToOne
-  @JoinColumn(name = "landmarkID")
-  Landmark landmark;
-
-  @ManyToOne
-  @JoinColumn(name = "tag")
-  Tag tag;
+  @Id private LandmarkTagID id;
 }
