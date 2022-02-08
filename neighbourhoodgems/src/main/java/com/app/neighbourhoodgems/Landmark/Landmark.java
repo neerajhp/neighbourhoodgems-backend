@@ -1,11 +1,16 @@
 package com.app.neighbourhoodgems.Landmark;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,8 +49,12 @@ public class Landmark {
   @JoinColumn(name = "type", referencedColumnName = "id")
   private Type type;
 
-  // @OneToMany(mappedBy = "landmark")
-  // Set<Tag> tags;
+  @ManyToMany
+  @JoinTable(
+      name = "landmarkTags",
+      joinColumns = @JoinColumn(name = "landmarkID"),
+      inverseJoinColumns = @JoinColumn(name = "tagID"))
+  Set<Tag> tags;
 
   public String getName() {
     return this.name;
@@ -95,19 +104,11 @@ public class Landmark {
     this.url = url;
   }
 
-  public Type getType() {
-    return this.type;
+  public String getType() {
+    return this.type.getId();
   }
 
-  public void setType(Type type) {
-    this.type = type;
+  public List<String> getTags() {
+    return this.tags.stream().map(car -> car.getName()).collect(Collectors.toList());
   }
-
-  // public Set<Tag> getTags() {
-  //   return this.tags;
-  // }
-
-  // public void setTags(Set<Tag> tags) {
-  //   this.tags = tags;
-  // }
 }

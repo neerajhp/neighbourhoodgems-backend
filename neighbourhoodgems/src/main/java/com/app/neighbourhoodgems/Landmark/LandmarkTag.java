@@ -1,8 +1,8 @@
 package com.app.neighbourhoodgems.Landmark;
 
 import java.io.Serializable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -14,5 +14,5 @@ import javax.persistence.Table;
 @Table(name = "landmarkTags")
 public class LandmarkTag implements Serializable {
 
-  @Id private LandmarkTagID id;
+  @EmbeddedId private LandmarkTagID id;
 }
