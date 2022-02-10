@@ -56,6 +56,10 @@ public class Landmark {
       inverseJoinColumns = @JoinColumn(name = "tagID"))
   Set<Tag> tags;
 
+  public Integer getID() {
+    return this.id;
+  }
+
   public String getName() {
     return this.name;
   }
